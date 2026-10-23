@@ -22,6 +22,7 @@ button.grow{flex:1}
 #answer{margin-top:1.25rem;padding-top:1.25rem;border-top:1px solid var(--line)}
 #hanzi{font-size:2.6rem;line-height:1.25;margin:0}
 #pinyin{font-size:1.25rem;color:var(--accent);margin:.4rem 0 0}
+select{font:inherit;padding:.6rem;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--ink);min-height:44px;max-width:100%;flex:1}
 [hidden]{display:none!important}
 .msg{color:var(--muted);font-size:.9rem;margin-top:1rem}
 .msg label{text-decoration:underline;cursor:pointer}
@@ -40,7 +41,8 @@ button.grow{flex:1}
     <div id="answer" hidden>
       <p id="hanzi" lang="zh-CN"></p>
       <p id="pinyin"></p>
-      <div class="row"><button id="play">🔊 Écouter</button></div>
+      <div class="row"><button id="play">🔊 Écouter</button><select id="voice" aria-label="Voix" hidden></select></div>
+      <p class="msg" id="voicemsg"></p>
     </div>
   </section>
   <p class="msg" id="msg"></p>
@@ -88,23 +90,39 @@ function play(){
   speak();
 }
 
+function zhVoices(){return speechSynthesis.getVoices().filter(v=>/^zh/i.test(v.lang.replace("_","-")))}
+
+function fillVoices(){
+  const sel=$('voice'), vs=zhVoices();
+  let saved=null; try{saved=localStorage.getItem("voice")}catch(e){}
+  sel.innerHTML="";
+  if(!vs.length){sel.hidden=true;$('voicemsg').textContent="Aucune voix chinoise détectée par le navigateur.";return}
+  $('voicemsg').textContent="";
+  sel.hidden=false;
+  vs.forEach(v=>{const o=document.createElement("option");o.value=v.voiceURI;o.textContent=`${v.name} (${v.lang})`;sel.appendChild(o)});
+  const cn=v=>/zh[-_]CN/i.test(v.lang);
+  const pick=vs.find(v=>v.voiceURI===saved)||vs.find(v=>cn(v)&&/enhanced|premium/i.test(v.name))||vs.find(cn)||vs[0];
+  sel.value=pick.voiceURI;
+}
+
 function speak(){
   speechSynthesis.cancel();
   const u=new SpeechSynthesisUtterance(current.hanzi);
-  u.lang="zh-CN";
+  const v=zhVoices().find(v=>v.voiceURI===$('voice').value);
+  u.lang=v?v.lang:"zh-CN";
+  if(v) u.voice=v;
   u.rate=.85;
-  const v=speechSynthesis.getVoices().filter(v=>v.lang.replace("_","-").startsWith("zh-CN"));
-  const best=v.find(x=>/enhanced|premium|ting|lili/i.test(x.name))||v[0];
-  if(best) u.voice=best;
   speechSynthesis.speak(u);
 }
 
 $('show').onclick=show;
 $('next').onclick=next;
 $('play').onclick=play;
-speechSynthesis.getVoices();
+speechSynthesis.onvoiceschanged=fillVoices;
+fillVoices();
+$('voice').onchange=()=>{try{localStorage.setItem("voice",$('voice').value)}catch(e){}};
 
-fetch("data.json").then(r=>{if(!r.ok)throw 0;return r.json()}).then(start).catch(()=>{
+fetch("data.json",{cache:"no-store"}).then(r=>{if(!r.ok)throw 0;return r.json()}).then(start).catch(()=>{
   $('count').textContent="";
   $('msg').innerHTML='Impossible de charger data.json. Importe le fichier à la main : <label>choisir un fichier<input type="file" accept=".json" id="file" hidden></label>';
   $('file').onchange=e=>{const f=e.target.files[0];if(f)f.text().then(t=>start(JSON.parse(t))).catch(()=>$('msg').textContent="JSON invalide.")};
