@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Phrases mandarin</title>
+<style>
+:root{--bg:#f1f4f4;--card:#fff;--ink:#17262e;--muted:#5d6e76;--line:#d5dde0;--accent:#1f6f5c;--accent-ink:#fff;color-scheme:light dark}
+@media (prefers-color-scheme:dark){:root{--bg:#10191d;--card:#18252b;--ink:#e8eef0;--muted:#93a4ab;--line:#2c3d45;--accent:#4fb89e;--accent-ink:#08201a}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.5 -apple-system,"PingFang SC","Helvetica Neue",Arial,sans-serif;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
+main{max-width:34rem;margin:0 auto;padding:1.25rem 1rem 3rem}
+header{display:flex;justify-content:space-between;align-items:baseline;color:var(--muted);font-size:.9rem;margin-bottom:1rem}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:1.25rem}
+#en{font-size:1.5rem;line-height:1.35;margin:0 0 1.25rem;font-weight:600}
+textarea{width:100%;min-height:5.5rem;font:inherit;padding:.75rem;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);resize:vertical}
+textarea:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.row{display:flex;gap:.6rem;margin-top:.9rem;flex-wrap:wrap}
+button{font:inherit;font-weight:600;padding:.7rem 1rem;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer;min-height:44px}
+button.main{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+button.grow{flex:1}
+#answer{margin-top:1.25rem;padding-top:1.25rem;border-top:1px solid var(--line)}
+#hanzi{font-size:2.6rem;line-height:1.25;margin:0}
+#pinyin{font-size:1.25rem;color:var(--accent);margin:.4rem 0 0}
+[hidden]{display:none!important}
+.msg{color:var(--muted);font-size:.9rem;margin-top:1rem}
+.msg label{text-decoration:underline;cursor:pointer}
+</style>
+</head>
+<body>
+<main>
+  <header><span id="count">Chargement…</span><span>Phrases mandarin</span></header>
+  <section class="card" id="card" hidden>
+    <p id="en"></p>
+    <textarea id="input" placeholder="Écris ta traduction en pinyin" autocapitalize="off" autocorrect="off" spellcheck="false"></textarea>
+    <div class="row">
+      <button class="main grow" id="show">Voir la réponse</button>
+      <button id="next">Suivante</button>
+    </div>
+    <div id="answer" hidden>
+      <p id="hanzi" lang="zh-CN"></p>
+      <p id="pinyin"></p>
+      <div class="row"><button id="play">🔊 Écouter</button></div>
+    </div>
+  </section>
+  <p class="msg" id="msg"></p>
+</main>
+<script>
+let items=[], deck=[], current=null, audio=null;
+const $=id=>document.getElementById(id);
+
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+
+function start(data){
+  items=data.filter(x=>x.en&&x.hanzi&&x.pinyin);
+  if(!items.length){$('msg').textContent="Le fichier ne contient aucune phrase valide (clés attendues : en, pinyin, hanzi).";return}
+  deck=shuffle(items);
+  $('card').hidden=false;
+  $('msg').textContent="";
+  next();
+}
+
+function next(){
+  if(!deck.length) deck=shuffle(items);
+  current=deck.pop();
+  $('en').textContent=current.en;
+  $('input').value="";
+  $('answer').hidden=true;
+  $('show').hidden=false;
+  $('count').textContent=`${items.length-deck.length} / ${items.length}`;
+  if(audio){audio.pause();audio=null}
+  speechSynthesis.cancel();
+}
+
+function show(){
+  $('hanzi').textContent=current.hanzi;
+  $('pinyin').textContent=current.pinyin;
+  $('answer').hidden=false;
+  $('show').hidden=true;
+}
+
+function play(){
+  if(current.audio){
+    audio=new Audio(current.audio);
+    audio.play().catch(speak);
+    return;
+  }
+  speak();
+}
+
+function speak(){
+  speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(current.hanzi);
+  u.lang="zh-CN";
+  u.rate=.85;
+  const v=speechSynthesis.getVoices().filter(v=>v.lang.replace("_","-").startsWith("zh-CN"));
+  const best=v.find(x=>/enhanced|premium|ting|lili/i.test(x.name))||v[0];
+  if(best) u.voice=best;
+  speechSynthesis.speak(u);
+}
+
+$('show').onclick=show;
+$('next').onclick=next;
+$('play').onclick=play;
+speechSynthesis.getVoices();
+
+fetch("data.json").then(r=>{if(!r.ok)throw 0;return r.json()}).then(start).catch(()=>{
+  $('count').textContent="";
+  $('msg').innerHTML='Impossible de charger data.json. Importe le fichier à la main : <label>choisir un fichier<input type="file" accept=".json" id="file" hidden></label>';
+  $('file').onchange=e=>{const f=e.target.files[0];if(f)f.text().then(t=>start(JSON.parse(t))).catch(()=>$('msg').textContent="JSON invalide.")};
+});
+</script>
+</body>
+</html>
