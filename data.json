@@ -58,5 +58,255 @@
     "en": "You know my friend.",
     "pinyin": "Nǐ rènshi wǒ de péngyou.",
     "hanzi": "你认识我的朋友。"
+  },
+  {
+    "en": "My dad drinks tea.",
+    "pinyin": "Wǒ bàba hē chá.",
+    "hanzi": "我爸爸喝茶。"
+  },
+  {
+    "en": "My mom is at home.",
+    "pinyin": "Wǒ māma zài jiā.",
+    "hanzi": "我妈妈在家。"
+  },
+  {
+    "en": "The weather is very good today.",
+    "pinyin": "Jīntiān tiānqì hěn hǎo.",
+    "hanzi": "今天天气很好。"
+  },
+  {
+    "en": "The weather was not good yesterday.",
+    "pinyin": "Zuótiān tiānqì bù hǎo.",
+    "hanzi": "昨天天气不好。"
+  },
+  {
+    "en": "Tomorrow I am going to Beijing.",
+    "pinyin": "Míngtiān wǒ qù Běijīng.",
+    "hanzi": "明天我去北京。"
+  },
+  {
+    "en": "I am at school now.",
+    "pinyin": "Wǒ xiànzài zài xuéxiào.",
+    "hanzi": "我现在在学校。"
+  },
+  {
+    "en": "He is my schoolmate.",
+    "pinyin": "Tā shì wǒ de tóngxué.",
+    "hanzi": "他是我的同学。"
+  },
+  {
+    "en": "I want to drink water.",
+    "pinyin": "Wǒ xiǎng hē shuǐ.",
+    "hanzi": "我想喝水。"
+  },
+  {
+    "en": "This is my book.",
+    "pinyin": "Zhè shì wǒ de shū.",
+    "hanzi": "这是我的书。"
+  },
+  {
+    "en": "That is a cat.",
+    "pinyin": "Nà shì māo.",
+    "hanzi": "那是猫。"
+  },
+  {
+    "en": "I have a son.",
+    "pinyin": "Wǒ yǒu yí gè érzi.",
+    "hanzi": "我有一个儿子。"
+  },
+  {
+    "en": "She has a daughter.",
+    "pinyin": "Tā yǒu yí gè nǚ'ér.",
+    "hanzi": "她有一个女儿。"
+  },
+  {
+    "en": "I don't have money.",
+    "pinyin": "Wǒ méiyǒu qián.",
+    "hanzi": "我没有钱。"
+  },
+  {
+    "en": "What is your name?",
+    "pinyin": "Nǐ jiào shénme míngzi?",
+    "hanzi": "你叫什么名字？"
+  },
+  {
+    "en": "He is called Xiao Ming.",
+    "pinyin": "Tā jiào Xiǎo Míng.",
+    "hanzi": "他叫小明。"
+  },
+  {
+    "en": "I like fruit.",
+    "pinyin": "Wǒ xǐhuan shuǐguǒ.",
+    "hanzi": "我喜欢水果。"
+  },
+  {
+    "en": "Thank you. You're welcome.",
+    "pinyin": "Xièxie, bú kèqi.",
+    "hanzi": "谢谢，不客气。"
+  },
+  {
+    "en": "Sorry. No problem.",
+    "pinyin": "Duìbuqǐ, méi guānxi.",
+    "hanzi": "对不起，没关系。"
+  },
+  {
+    "en": "I have many friends.",
+    "pinyin": "Wǒ yǒu hěn duō péngyou.",
+    "hanzi": "我有很多朋友。"
+  },
+  {
+    "en": "I am a student.",
+    "pinyin": "Wǒ shì xuésheng.",
+    "hanzi": "我是学生。"
+  },
+  {
+    "en": "The doctor is at the hospital.",
+    "pinyin": "Yīshēng zài yīyuàn.",
+    "hanzi": "医生在医院。"
+  },
+  {
+    "en": "I go to the shop in the afternoon.",
+    "pinyin": "Wǒ xiàwǔ qù shāngdiàn.",
+    "hanzi": "我下午去商店。"
+  },
+  {
+    "en": "I study Chinese in the morning.",
+    "pinyin": "Wǒ shàngwǔ xuéxí Hànyǔ.",
+    "hanzi": "我上午学习汉语。"
+  },
+  {
+    "en": "I eat at noon.",
+    "pinyin": "Wǒ zhōngwǔ chī fàn.",
+    "hanzi": "我中午吃饭。"
+  },
+  {
+    "en": "What time is it now?",
+    "pinyin": "Xiànzài jǐ diǎn?",
+    "hanzi": "现在几点？"
+  },
+  {
+    "en": "It is eight o'clock now.",
+    "pinyin": "Xiànzài bā diǎn.",
+    "hanzi": "现在八点。"
+  },
+  {
+    "en": "This apple is very big.",
+    "pinyin": "Zhège píngguǒ hěn dà.",
+    "hanzi": "这个苹果很大。"
+  },
+  {
+    "en": "That cup is very small.",
+    "pinyin": "Nàge bēizi hěn xiǎo.",
+    "hanzi": "那个杯子很小。"
+  },
+  {
+    "en": "It is very hot today.",
+    "pinyin": "Jīntiān hěn rè.",
+    "hanzi": "今天很热。"
+  },
+  {
+    "en": "I don't want to eat, it's too spicy.",
+    "pinyin": "Wǒ bù xiǎng chī, tài là le.",
+    "hanzi": "我不想吃，太辣了。"
+  },
+  {
+    "en": "I want to buy clothes.",
+    "pinyin": "Wǒ xiǎng mǎi yīfu.",
+    "hanzi": "我想买衣服。"
+  },
+  {
+    "en": "Do you like dogs?",
+    "pinyin": "Nǐ xǐhuan gǒu ma?",
+    "hanzi": "你喜欢狗吗？"
+  },
+  {
+    "en": "I like horses.",
+    "pinyin": "Wǒ xǐhuan mǎ.",
+    "hanzi": "我喜欢马。"
+  },
+  {
+    "en": "She is very beautiful.",
+    "pinyin": "Tā hěn piàoliang.",
+    "hanzi": "她很漂亮。"
+  },
+  {
+    "en": "I am very happy.",
+    "pinyin": "Wǒ hěn gāoxìng.",
+    "hanzi": "我很高兴。"
+  },
+  {
+    "en": "I watch TV.",
+    "pinyin": "Wǒ kàn diànshì.",
+    "hanzi": "我看电视。"
+  },
+  {
+    "en": "He calls his dad.",
+    "pinyin": "Tā gěi bàba dǎ diànhuà.",
+    "hanzi": "他给爸爸打电话。"
+  },
+  {
+    "en": "The computer is on the table.",
+    "pinyin": "Diànnǎo zài zhuōzi shàng.",
+    "hanzi": "电脑在桌子上。"
+  },
+  {
+    "en": "The book is on the chair.",
+    "pinyin": "Shū zài yǐzi shàng.",
+    "hanzi": "书在椅子上。"
+  },
+  {
+    "en": "I listen to the teacher speak Chinese.",
+    "pinyin": "Wǒ tīng lǎoshī shuō Hànyǔ.",
+    "hanzi": "我听老师说汉语。"
+  },
+  {
+    "en": "I write Chinese.",
+    "pinyin": "Wǒ xiě Hànyǔ.",
+    "hanzi": "我写汉语。"
+  },
+  {
+    "en": "It is raining today.",
+    "pinyin": "Jīntiān xià yǔ.",
+    "hanzi": "今天下雨。"
+  },
+  {
+    "en": "I take a taxi to school.",
+    "pinyin": "Wǒ zuò chūzūchē qù xuéxiào.",
+    "hanzi": "我坐出租车去学校。"
+  },
+  {
+    "en": "My dad works in Beijing.",
+    "pinyin": "Wǒ bàba zài Běijīng gōngzuò.",
+    "hanzi": "我爸爸在北京工作。"
+  },
+  {
+    "en": "How old are you?",
+    "pinyin": "Nǐ jǐ suì?",
+    "hanzi": "你几岁？"
+  },
+  {
+    "en": "My son is eight years old.",
+    "pinyin": "Wǒ érzi bā suì.",
+    "hanzi": "我儿子八岁。"
+  },
+  {
+    "en": "Please drink tea.",
+    "pinyin": "Qǐng hē chá.",
+    "hanzi": "请喝茶。"
+  },
+  {
+    "en": "I go back home.",
+    "pinyin": "Wǒ huí jiā.",
+    "hanzi": "我回家。"
+  },
+  {
+    "en": "Do you come to school?",
+    "pinyin": "Nǐ lái xuéxiào ma?",
+    "hanzi": "你来学校吗？"
+  },
+  {
+    "en": "Goodbye, teacher!",
+    "pinyin": "Lǎoshī zàijiàn!",
+    "hanzi": "老师再见！"
   }
 ]
