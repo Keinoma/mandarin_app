@@ -4,6 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Phrases mandarin</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-180.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Mandarin">
+<meta name="theme-color" content="#1f6f5c">
 <style>
 :root{--bg:#f1f4f4;--card:#fff;--ink:#17262e;--muted:#5d6e76;--line:#d5dde0;--accent:#1f6f5c;--accent-ink:#fff;color-scheme:light dark}
 @media (prefers-color-scheme:dark){:root{--bg:#10191d;--card:#18252b;--ink:#e8eef0;--muted:#93a4ab;--line:#2c3d45;--accent:#4fb89e;--accent-ink:#08201a}}
@@ -127,6 +132,7 @@ fetch("data.json",{cache:"no-store"}).then(r=>{if(!r.ok)throw 0;return r.json()}
   $('msg').innerHTML='Impossible de charger data.json. Importe le fichier à la main : <label>choisir un fichier<input type="file" accept=".json" id="file" hidden></label>';
   $('file').onchange=e=>{const f=e.target.files[0];if(f)f.text().then(t=>start(JSON.parse(t))).catch(()=>$('msg').textContent="JSON invalide.")};
 });
+if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}))}
 </script>
 </body>
 </html>
