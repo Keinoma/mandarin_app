@@ -28,6 +28,8 @@ button.grow{flex:1}
 #hanzi{font-size:2.6rem;line-height:1.25;margin:0}
 #pinyin{font-size:1.25rem;color:var(--accent);margin:.4rem 0 0}
 select{font:inherit;padding:.6rem;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--ink);min-height:44px;max-width:100%;flex:1}
+.toggle{display:flex;align-items:center;gap:.6rem;min-height:44px;margin:-.25rem 0 .75rem;color:var(--ink);cursor:pointer}
+.toggle input{width:1.3rem;height:1.3rem;accent-color:var(--accent)}
 [hidden]{display:none!important}
 .msg{color:var(--muted);font-size:.9rem;margin-top:1rem}
 .msg label{text-decoration:underline;cursor:pointer}
@@ -36,6 +38,7 @@ select{font:inherit;padding:.6rem;border-radius:8px;border:1px solid var(--line)
 <body>
 <main>
   <header><span id="count">Chargement…</span><span>Phrases mandarin</span></header>
+  <label class="toggle"><input type="checkbox" id="alt"> Utiliser data2.json</label>
   <section class="card" id="card" hidden>
     <p id="en"></p>
     <textarea id="input" placeholder="Écris ta traduction en pinyin" autocapitalize="off" autocorrect="off" spellcheck="false"></textarea>
@@ -127,11 +130,18 @@ speechSynthesis.onvoiceschanged=fillVoices;
 fillVoices();
 $('voice').onchange=()=>{try{localStorage.setItem("voice",$('voice').value)}catch(e){}};
 
-fetch("data.json",{cache:"no-store"}).then(r=>{if(!r.ok)throw 0;return r.json()}).then(start).catch(()=>{
-  $('count').textContent="";
-  $('msg').innerHTML='Impossible de charger data.json. Importe le fichier à la main : <label>choisir un fichier<input type="file" accept=".json" id="file" hidden></label>';
-  $('file').onchange=e=>{const f=e.target.files[0];if(f)f.text().then(t=>start(JSON.parse(t))).catch(()=>$('msg').textContent="JSON invalide.")};
-});
+function load(){
+  const file=$('alt').checked?"data2.json":"data.json";
+  fetch(file,{cache:"no-store"}).then(r=>{if(!r.ok)throw 0;return r.json()}).then(start).catch(()=>{
+    $('card').hidden=true;
+    $('count').textContent="";
+    $('msg').innerHTML=`Impossible de charger ${file}. Importe le fichier à la main : <label>choisir un fichier<input type="file" accept=".json" id="file" hidden></label>`;
+    $('file').onchange=e=>{const f=e.target.files[0];if(f)f.text().then(t=>start(JSON.parse(t))).catch(()=>$('msg').textContent="JSON invalide.")};
+  });
+}
+try{$('alt').checked=localStorage.getItem("useData2")==="1"}catch(e){}
+$('alt').onchange=()=>{try{localStorage.setItem("useData2",$('alt').checked?"1":"0")}catch(e){}load()};
+load();
 if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}))}
 </script>
 </body>
